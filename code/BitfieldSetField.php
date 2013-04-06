@@ -88,15 +88,19 @@ class BitfieldSetField extends CheckboxSetField {
 	 * @return string
 	 */
 	function dataValue() {
-		if($this->value && is_array($this->value)) {
-			$filtered = array();
-			foreach($this->value as $item) {
-				if($item) {
-					$filtered[] = str_replace(",", "{comma}", $item);
+		if($this->value) {
+			if (is_array($this->value)) {
+				$filtered = array();
+				foreach($this->value as $item) {
+					if($item) {
+						$filtered[] = str_replace(",", "{comma}", $item);
+					}
 				}
-			}
 
-			return implode(',', $filtered);
+				return implode(',', $filtered);
+			} else {
+				return intval($this->value);
+			}
 		}
 
 		return '';
